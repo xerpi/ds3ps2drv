@@ -113,4 +113,15 @@ int ds3ps2_send_ledsrumble(int slot);
 void ds3ps2_get_input(int slot, struct SS_GAMEPAD *ps3pad);
 
 
+// IRX Imports
+#define ds3ps2_IMPORTS_start DECLARE_IMPORT_TABLE(ds3ps2, 1, 1)
+#define ds3ps2_IMPORTS_end END_IMPORT_TABLE
+
+#define I_ds3ps2_slot_connected DECLARE_IMPORT(1, ds3ps2_slot_connected)
+#define I_ds3ps2_set_led DECLARE_IMPORT(2, ds3ps2_set_led)
+#define I_ds3ps2_set_rumble DECLARE_IMPORT(3, ds3ps2_set_rumble)
+#define I_ds3ps2_send_ledsrumble DECLARE_IMPORT(4, ds3ps2_send_ledsrumble)
+#define I_ds3ps2_get_input DECLARE_IMPORT(5, ds3ps2_get_input)
+
+
 #endif

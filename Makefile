@@ -26,6 +26,8 @@ clean:
 
 install: $(IOP_BIN)
 	cp $(IOP_BIN) $(PS2SDK)/iop/irx
+	cp ds3ps2drv.h   $(PS2SDK)/iop/include
+	cp ds3ps2drv.h   $(PS2SDK)/ee/include
 
 #FOR ME!!
 copy: $(IOP_BIN)

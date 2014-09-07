@@ -1,9 +1,13 @@
-#include <thbase.h>
 #include <sifcmd.h>
 #include <usbd.h>
 #include <usbd_macro.h>
 #include <string.h>
+#include <loadcore.h>
 #include "ds3ps2drv.h"
+
+#define MODNAME "ds3ps2drv"
+IRX_ID("ds3ps2 driver", 1, 1);
+struct irx_export_table _exp_ds3ps2;
 
 static struct SS_GAMEPAD gamepad[DS3PS2_MAX_SLOTS];
 static u8 opbuf[17] __attribute((aligned(64)));
@@ -13,7 +17,7 @@ static int usb_probe(int devId);
 static int usb_connect(int devId);
 static int usb_disconnect(int devId);
 
-static UsbDriver driver = { NULL, NULL, "ds3ps2", usb_probe, usb_connect, usb_disconnect };
+static UsbDriver driver = { NULL, NULL, "ds3ps2usbdrv", usb_probe, usb_connect, usb_disconnect };
 
 static void request_data(int result, int count, void *arg);
 static void config_set(int result, int count, void *arg);
@@ -30,10 +34,14 @@ static struct {
     } rumble;
 } ds3_list[DS3PS2_MAX_SLOTS];
 
-int _start()
+s32 _start(char **argv, int argc)
 {
+    if(RegisterLibraryEntries(&_exp_ds3ps2) != 0) {
+        //Failed
+        return 1;
+    }
     UsbRegisterDriver(&driver);
-    return 1;
+    return 0;
 }
 
 int usb_probe(int devId)

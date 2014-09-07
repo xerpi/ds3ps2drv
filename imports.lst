@@ -1,3 +1,7 @@
+loadcore_IMPORTS_start
+I_RegisterLibraryEntries
+loadcore_IMPORTS_end
+
 sysclib_IMPORTS_start
 I_memcpy
 sysclib_IMPORTS_end
